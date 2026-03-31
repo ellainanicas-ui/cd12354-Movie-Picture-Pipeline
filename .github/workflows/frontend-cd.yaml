@@ -92,9 +92,9 @@ jobs:
       - name: Build Docker image
         run: |
           docker build \
-            --build-arg REACT_APP_MOVIE_API_URL=${{ secrets.REACT_APP_MOVIE_API_URL }} \
-            -t ${{ secrets.FRONTEND_ECR_REPO }}:${GITHUB_SHA} .
-
+            --build-arg "REACT_APP_MOVIE_API_URL=http://${{ secrets.REACT_APP_MOVIE_API_URL }}" \
+            -t ${{ secrets.FRONTEND_ECR_REPO }}:${GITHUB_SHA} \
+            .
       - name: Push Docker image
         run: |
           docker push ${{ secrets.FRONTEND_ECR_REPO }}:${GITHUB_SHA}
